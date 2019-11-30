@@ -110,7 +110,7 @@
 
         button {
             -webkit-transition-duration: 0.4s;
-            background: lightseagreen;
+            background: darkorange;
             border-radius: 5px;
             border: none;
             color: #fff;
@@ -123,10 +123,10 @@
         }
 
         button:hover {
-            background-color: darkorange;
+            background-color: lightseagreen;
         }
 
-        input[type="text"], select {
+        input[type="text"], input[type="password"], select {
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             background-color: #fff;
@@ -141,11 +141,11 @@
             padding: .5em .6em;
             text-transform: none;
             vertical-align: baseline;
-            width: 200px;
+            width: 220px;
         }
 
         input[type="range"] {
-            width: 200px;
+            width: 220px;
         }
 
         table {
@@ -157,7 +157,7 @@
             left: 50%;
             margin-left: -175px;
             position: absolute;
-            top: 20%;
+            top: 12%;
             width: 350px;
         }
 
@@ -182,8 +182,8 @@
             text-align: center !important;
             display: block;
             width: 100%;
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 3.2rem;
+            font-weight: 300;
             font-family: consolas, monaco, menlo, 'courier new', courier, monospace, 'MS Courier New', 'American Typewriter';
             word-wrap: break-word;
             word-break: break-all;
@@ -197,26 +197,26 @@
     <h1>Password Generator</h1>
     <table cellspacing="0" border="0">
         <tr>
-            <td width="60"><span>Type</span></td>
+            <td width="60"><span>Algorithm</span></td>
             <td>
                 <select id="type">
+                    <option value="MD5">MD5</option>
+                    <option value="SHA1">SHA1</option>
                     <option value="SHA256">SHA256</option>
                     <option value="SHA512">SHA512</option>
                     <option value="RMD160">RMD160</option>
-                    <option value="SHA1">SHA1</option>
-                    <option value="MD5">MD5</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td><span>Content</span></td>
+            <td><span>Meesage</span></td>
             <td>
-                <input id="content" type="text" placeholder="some prompt">
+                <input id="content" type="text" placeholder="message to be authenticated">
             </td>
         </tr>
         <tr>
-            <td><span>HMAC</span></td>
-            <td><input id="hmac" type="text" placeholder="password"></td>
+            <td><span>Key</span></td>
+            <td><input id="hmac" type="password" placeholder="secret key"></td>
         </tr>
         <tr>
             <td><span>Len <code id="length-show">16</code></span></td>
@@ -270,17 +270,17 @@
                         localStorage.setItem('_1pwd_type_', t);
                         localStorage.setItem('_1pwd_leng_', value);
                     } else {
-                        alert('missing 1password');
+                        alert('Missing secret key!');
                         hmac.focus();
                         hmac.select();
                     }
                 } else {
-                    alert('missing content');
+                    alert('Missing message!');
                     content.focus();
                     content.select();
                 }
             } else {
-                alert('Invalid type');
+                alert('Invalid Algorithm!');
             }
         };
         window.range = function () {
